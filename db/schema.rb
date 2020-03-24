@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200324194909) do
+ActiveRecord::Schema.define(version: 20200324200810) do
+
+  create_table "applications", force: :cascade do |t|
+    t.integer "position_id"
+    t.integer "candidate_id"
+  end
 
   create_table "candidates", force: :cascade do |t|
     t.string "name"
