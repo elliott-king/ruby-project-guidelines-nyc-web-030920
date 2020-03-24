@@ -21,7 +21,21 @@ class Position < ActiveRecord::Base
       position.company.downcase.include?(company.downcase)
     end
   end
-  
+
+  def self.search_type(type)
+    self.all.select do |position|
+      position.position_type.downcase.include?(type.downcase)
+    end
+  end
+
+  def self.search_recent_positions
+    puts "Here are positions created in last 30 days: "
+    self.all.select do |position|
+      d = DateTime.now - 30 
+      position.created_at > d 
+    end
+  end
+
 
 
 
