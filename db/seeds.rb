@@ -12,5 +12,6 @@ response = Net::HTTP.get_response(uri)
 # data is an array with 50 elements
 data = JSON.parse(response.body) 
 # TODO: return link from how_to_apply
+# TODO: parse the HTML tag in data[i]['description']
 
 binding.pry # check our data
