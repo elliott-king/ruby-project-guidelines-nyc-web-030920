@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200323204117) do
+ActiveRecord::Schema.define(version: 20200324192857) do
 
   create_table "positions", force: :cascade do |t|
     t.string   "api_id"
-    t.string   "type"
+    t.string   "position_type"
     t.string   "url"
     t.datetime "created_at"
     t.string   "company"
