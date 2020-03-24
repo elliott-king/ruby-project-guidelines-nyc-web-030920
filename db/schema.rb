@@ -10,11 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200323204117) do
+ActiveRecord::Schema.define(version: 20200324194909) do
+
+  create_table "candidates", force: :cascade do |t|
+    t.string "name"
+    t.float  "gpa"
+    t.string "education_level"
+    t.string "native_language"
+    t.string "second_language"
+  end
 
   create_table "positions", force: :cascade do |t|
     t.string   "api_id"
-    t.string   "type"
+    t.string   "position_type"
     t.string   "url"
     t.datetime "created_at"
     t.string   "company"
