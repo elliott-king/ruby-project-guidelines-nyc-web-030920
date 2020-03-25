@@ -1,6 +1,7 @@
 class Position < ActiveRecord::Base
   has_many :applications
   has_many :candidates, through: :applications
+  belongs_to :company
 
   #create methods start here
   #search_postions with desired attributes

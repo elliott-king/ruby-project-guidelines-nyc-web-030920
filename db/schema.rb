@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200324200810) do
+ActiveRecord::Schema.define(version: 20200325141347) do
 
   create_table "applications", force: :cascade do |t|
     t.integer "position_id"
@@ -25,18 +25,22 @@ ActiveRecord::Schema.define(version: 20200324200810) do
     t.string "second_language"
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "url"
+    t.string "company_logo"
+  end
+
   create_table "positions", force: :cascade do |t|
     t.string   "api_id"
     t.string   "position_type"
     t.string   "url"
     t.datetime "created_at"
-    t.string   "company"
-    t.string   "company_url"
     t.string   "location"
     t.string   "title"
     t.string   "description"
     t.string   "how_to_apply"
-    t.string   "company_logo"
+    t.integer  "company_id"
   end
 
 end

@@ -5,6 +5,7 @@ require "open-uri"
 
 Position.destroy_all
 Candidate.destroy_all
+Company.destroy_all
 
 OUR_URL = "https://jobs.github.com/positions.json"
 uri = URI.parse(URI.escape(OUR_URL))
@@ -19,13 +20,20 @@ data.each do |position|
   p.position_type = position["type"]
   p.url = position["url"]
   p.created_at = position["created_at"]
-  p.company = position["company"]
-  p.company_url = position["company_url"]
   p.location = position["location"]
   p.title = position["title"]
   p.description = position["description"]
   p.how_to_apply = position["how_to_apply"]
-  p.company_logo = position["company_logo"]
+
+  c = Company.find_or_create_by(name: position["company"])
+  if !c.url
+    c.url = position["company_url"]
+  end
+  if !c.company_logo 
+    c.company_logo = position["company_logo"]
+  end
+  c.save
+  p.company = c
   p.save
 end
 
