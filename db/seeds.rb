@@ -16,10 +16,6 @@ data = JSON.parse(response.body)
 # TODO: return link from how_to_apply
 #Removing html tags in text blocks with Nokogiri DocumentFragment class
 
-# class RemoveTags
-#   include ActionView::Helpers::SanitizeHelper
-# end
-
 data.each do |position|
   p = Position.new()
   p.api_id = position["id"]
@@ -30,8 +26,8 @@ data.each do |position|
   p.company_url = position["company_url"]
   p.location = position["location"]
   p.title = position["title"]
-  p.description = Nokogiri::HTML::DocumentFragment.parse(position["description"]).xpath('text()') #need to remove html tags
-  p.how_to_apply = Nokogiri::HTML::DocumentFragment.parse(position["how_to_apply"]).xpath('text()') #remove html tags
+  p.description = Nokogiri::HTML::DocumentFragment.parse(position["description"]).text #removes html tags
+  p.how_to_apply = Nokogiri::HTML::DocumentFragment.parse(position["how_to_apply"]).text #removes html tags
   p.company_logo = position["company_logo"]
   p.save
 end
