@@ -21,7 +21,13 @@ class GithubAPI
       p.location = position["location"]
       p.title = position["title"]
       p.description = Nokogiri::HTML::DocumentFragment.parse(position["description"]).text #removes html tags
-      p.how_to_apply = Nokogiri::HTML::DocumentFragment.parse(position["how_to_apply"]).text #removes html tags
+      
+      if Nokogiri::HTML::DocumentFragment.parse(position["how_to_apply"]).xpath(".//a")
+        p.how_to_apply = Nokogiri::HTML::DocumentFragment.parse(position["how_to_apply"]).xpath('.//a').attribute("href")
+      else
+        p.how_to_apply = Nokogiri::HTML::DocumentFragment.parse(position["how_to_apply"]).text #removes html tags
+      end
+
       p.company_logo = position["company_logo"]
       p.save
     end
