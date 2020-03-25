@@ -9,3 +9,4 @@ gem "require_all"
 # our added gems
 gem "rest-client"
 gem "json"
+gem 'nokogiri'

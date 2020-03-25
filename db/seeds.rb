@@ -1,3 +1,4 @@
+require 'nokogiri'
 require "pry"
 require "json"
 require "net/http"
@@ -13,6 +14,12 @@ response = Net::HTTP.get_response(uri)
 data = JSON.parse(response.body)
 # TODO: more than just first page
 # TODO: return link from how_to_apply
+#Removing html tags in text blocks with Nokogiri DocumentFragment class
+
+# class RemoveTags
+#   include ActionView::Helpers::SanitizeHelper
+# end
+
 data.each do |position|
   p = Position.new()
   p.api_id = position["id"]
@@ -23,8 +30,8 @@ data.each do |position|
   p.company_url = position["company_url"]
   p.location = position["location"]
   p.title = position["title"]
-  p.description = position["description"]
-  p.how_to_apply = position["how_to_apply"]
+  p.description = Nokogiri::HTML::DocumentFragment.parse(position["description"]).xpath('text()') #need to remove html tags
+  p.how_to_apply = Nokogiri::HTML::DocumentFragment.parse(position["how_to_apply"]).xpath('text()') #remove html tags
   p.company_logo = position["company_logo"]
   p.save
 end
