@@ -9,3 +9,5 @@ gem "require_all"
 # our added gems
 gem "rest-client"
 gem "json"
+gem "tty-prompt"
+gem "tty-box"
