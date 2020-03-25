@@ -6,7 +6,7 @@ require "open-uri"
 
 Position.destroy_all
 Candidate.destroy_all
-
+Company.destroy_all
 
 class GithubAPI
   def self.seed_positions(data)
@@ -16,8 +16,6 @@ class GithubAPI
       p.position_type = position["type"]
       p.url = position["url"]
       p.created_at = position["created_at"]
-      p.company = position["company"]
-      p.company_url = position["company_url"]
       p.location = position["location"]
       p.title = position["title"]
       p.description = Nokogiri::HTML::DocumentFragment.parse(position["description"]).text #removes html tags
@@ -28,7 +26,15 @@ class GithubAPI
         p.how_to_apply = Nokogiri::HTML::DocumentFragment.parse(position["how_to_apply"]).text #removes html tags
       end
 
-      p.company_logo = position["company_logo"]
+      c = Company.find_or_create_by(name: position["company"])
+      if !c.url
+        c.url = position["company_url"]
+      end
+      if !c.company_logo 
+        c.company_logo = position["company_logo"]
+      end
+      c.save
+      p.company = c
       p.save
     end
   end
