@@ -83,7 +83,7 @@ class Position < ActiveRecord::Base
       end
     end
     max_company_pair = company_hash.max_by {|k, v| v}
-    puts "Company #{max_company_pair[0]} has the maximum number #{max_company_pair[1]} of positions."
+    puts "Company #{max_company_pair[0].name} has the maximum number #{max_company_pair[1]} of positions."
   end
 
 end
