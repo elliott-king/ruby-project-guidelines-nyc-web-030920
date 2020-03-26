@@ -60,13 +60,13 @@ class GithubAPI
   end
 
   def self.initial_api_call
-    self.api_call(0)
+    self.api_call(1)
   end
 
   def self.seed_positions_until_full
-    data = initial_api_call #initial seeding for page 0
+    data = self.initial_api_call #initial seeding for page 0
 
-    page = 1 #increment to page 1 for next batch
+    page = 2 #increment to page 1 for next batch
 
     until data.empty? do #loop until the page called returns empty
       data = api_call(page)
