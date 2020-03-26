@@ -84,7 +84,3 @@ elliott = Candidate.new(name: 'Elliott', gpa: 5.0, education_level: 'bachelor', 
 brett = Candidate.new(name: 'Brett', gpa: 2.99, education_level: 'master', native_language: 'French', second_language: 'English').save 
 
 
-
-  # TODO: return link from how_to_apply
-  # Removing html tags in text blocks with Nokogiri DocumentFragment class
-  # Returns all responses from all api pages

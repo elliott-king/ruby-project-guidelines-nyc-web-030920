@@ -54,12 +54,13 @@ features = [
 ]
 
 choice = 0
-
+positions = [] 
 while choice != features[6]
   choice = prompt.select("Choose what you would like to do:", features, per_page: 8)
-  positions = [] 
+  
 
   if choice == features[0]
+    positions = [] 
     keywords = prompt.ask("What kind of jobs would you like to search for?").downcase.split()
     keywords.each do |keyword|
       positions += Position.search_title(keyword)
@@ -68,6 +69,7 @@ while choice != features[6]
     positions.each {|pos| puts pos.title + " " + pos.location}
       
   elsif choice == features[1]
+    positions = [] 
     keywords = prompt.ask("What's the name of the company you would like to search for?").downcase.split()
     keywords.each do |keyword|
       positions += Position.search_company(keyword)
@@ -75,6 +77,7 @@ while choice != features[6]
     positions.uniq!
     positions.each {|pos| puts pos.title + " " + pos.company.name}
   elsif choice == features[2]
+    positions = [] 
     keywords = prompt.ask("What location would you like to search for?").downcase.split()
     keywords.each do |keyword|
       positions += Position.search_location(keyword)
@@ -82,11 +85,13 @@ while choice != features[6]
     positions.uniq!
     positions.each {|pos| puts pos.title + " " + pos.location}
   elsif choice == features[3]
+    positions = [] 
     puts "Here are positions created in last 5 days: "
     positions = Position.search_recent_positions
     positions.uniq!
     positions.each {|pos| puts pos.title + " " + pos.location}
   elsif choice == features[4]
+    positions = [] 
     keywords = prompt.ask("What skill would you like to search for?").downcase.split()
     keywords.each do |keyword|
       positions += Position.search_skill(keyword)
@@ -94,11 +99,19 @@ while choice != features[6]
     positions.uniq!
     positions.each {|pos| puts pos.title + " " + pos.location}
   elsif choice == features[5]
-    #TODO Apply to position
+    user = Candidate.new 
+    user.name = prompt.ask("What is your name?")
+    user.gpa = prompt.ask("What is your GPA?")
+    user.save
+    user_position = prompt.select("Which position you want to apply?", positions.map {|position| position.title})
+    user_position = Position.find_by(title: user_position)
+    new_application = Application.create(candidate: user, position: user_position)
+    puts "Congrats! #{user.name} just create an application to #{user_position.title}!"
   else
     #repeat choices
     #add loop to return to main menu
   end
+
 
   puts
 
