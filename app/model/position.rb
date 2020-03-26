@@ -19,7 +19,7 @@ class Position < ActiveRecord::Base
 
   def self.search_company(company)
     self.all.select do |position|
-      position.company.downcase.include?(company.downcase)
+      position.company.name.downcase.include?(company.downcase)
     end
   end
 
