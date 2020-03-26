@@ -106,6 +106,9 @@ while choice != features[6]
     user_position = prompt.select("Which position you want to apply?", positions.map {|position| position.title})
     user_position = Position.find_by(title: user_position)
     new_application = Application.create(candidate: user, position: user_position)
+
+    puts "#{user.name}, you can apply for this position at #{user_position.url}"
+    puts 
     puts "Congrats! #{user.name} just create an application to #{user_position.title}!"
   else
     #repeat choices
