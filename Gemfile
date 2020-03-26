@@ -12,3 +12,8 @@ gem "json"
 gem 'nokogiri'
 gem "tty-prompt"
 gem "tty-box"
+
+# for tests
+gem "rspec"
+gem "rake"
+gem "database_cleaner"
