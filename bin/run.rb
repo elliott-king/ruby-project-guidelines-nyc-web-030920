@@ -103,13 +103,17 @@ while choice != features[6]
     user.name = prompt.ask("What is your name?")
     user.gpa = prompt.ask("What is your GPA?")
     user.save
-    user_position = prompt.select("Which position you want to apply?", positions.map {|position| position.title})
-    user_position = Position.find_by(title: user_position)
-    new_application = Application.create(candidate: user, position: user_position)
-
-    puts "#{user.name}, you can apply for this position at #{user_position.url}"
-    puts 
-    puts "Congrats! #{user.name} just create an application to #{user_position.title}!"
+    begin
+      user_position = prompt.select("Which position you want to apply?", positions.map {|position| position.title})
+      user_position = Position.find_by(title: user_position)
+      new_application = Application.create(candidate: user, position: user_position)
+      puts "#{user.name}, you can apply for this position at #{user_position.url}"
+      puts 
+      puts "Congrats! #{user.name} just create an application to #{user_position.title}!"
+    rescue NoMethodError => e
+      puts "Please search for positions before applying."
+    end
+  
   else
     #repeat choices
     #add loop to return to main menu

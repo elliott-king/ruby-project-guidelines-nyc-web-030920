@@ -57,3 +57,48 @@ Projects need to be approved prior to launching into them, so take some time to 
 # in config/environment.rb add this line:
 ActiveRecord::Base.logger = nil
 ```
+
+
+---
+---
+
+# mango™ jobs README
+
+## Installation
+
+1. [Clone the Repo on GitHub](https://github.com/elliott-king/ruby-project-guidelines-nyc-web-030920)
+
+
+2. CD to project directory on command-line
+
+3. Run the run.rb file using the following:
+
+```
+ruby ./bin/run.rb
+```
+
+## Usage
+
+Use mango™ jobs to search a database of current job openings around the world.
+
+Once you've opened the application on your command-line, you'll be presented with the following options:
+
+* Search Position by Company
+* Search Position by Location
+* Search for all new Positions from the last 5 days
+* Search Position by Skill
+* Apply to Position
+* Exit
+
+Each Search option will allow you to input a string of characters to search for within the database.
+
+When you're ready to apply, just select the "Apply to Position" option and answer the following prompts:
+
+* What is your name?
+* 
+
+## Contributing
+
+## License
+
+## Main Contributors
