@@ -30,14 +30,13 @@ class Position < ActiveRecord::Base
   end
 
   def self.search_recent_positions
-    puts "Here are positions created in last 30 days: "
     self.all.select do |position|
-      d = DateTime.now - 30 
+      d = DateTime.now - 5 
       position.created_at > d 
     end
   end
 
-  def self.search_by_skill(skill)
+  def self.search_skill(skill)
     self.all.select do|position|
       position.description.downcase.include?(skill.downcase)
     end
