@@ -8,38 +8,38 @@ class Position < ActiveRecord::Base
   def self.search_title(title)
     self.all.select do |position|
       position.title.downcase.include?(title.downcase)
-    end
+    end.uniq
   end
 
   def self.search_location(location)
     self.all.select do |position|
       position.location.downcase.include?(location.downcase)
-    end
+    end.uniq
   end
 
   def self.search_company(company)
     self.all.select do |position|
       position.company.name.downcase.include?(company.downcase)
-    end
+    end.uniq
   end
 
   def self.search_type(type)
     self.all.select do |position|
       position.position_type.downcase.include?(type.downcase)
-    end
+    end.uniq
   end
 
   def self.search_recent_positions
     self.all.select do |position|
       d = DateTime.now - 5 
       position.created_at > d 
-    end
+    end.uniq
   end
 
   def self.search_skill(skill)
     self.all.select do|position|
       position.description.downcase.include?(skill.downcase)
-    end
+    end.uniq
   end
 
   def self.max_by_location
