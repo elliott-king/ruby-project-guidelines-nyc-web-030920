@@ -33,4 +33,18 @@ describe "Company" do
 
     expect(Company.find_by(name: "temp2")).to eq(c2)
   end
+
+  it "finds companies w/ multiple positions" do
+    # the normal case
+    # corner cases: nil, empty sets, ...?
+   expect(Company.have_multiple_positions.count).to eq(0)
+
+   cnew = Company.create(name: "new", url: "example2.com")
+   p1 = Position.create(company: cnew)
+   expect(Company.have_multiple_positions.count).to eq(0)
+
+   p2 = Position.create(company: cnew)
+   expect(Company.have_multiple_positions.count).to eq(1)
+  end
+
 end
